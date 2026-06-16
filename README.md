@@ -5,7 +5,7 @@ Extraordinario Amerike Ximena Senties Ruiz
 
 
 ## 2. Diagrama de flujo 
-```Mermaid
+```mermaid
 flowchart TD
 
 A([Inicio]) --> B[Inicializar colección de movimientos]
@@ -47,9 +47,22 @@ D -->|Salir| P([Fin])
 ## 3. Pseudocódigo
 
 ### Módulo de validación
+validarMonto()
+validarCategoria()
+validarTipo()
 
 ### Módulo de datos
+crearMovimiento()
+agregarMovimiento()
 
 ### Módulo de cálculo
+calcularGastoPorCategoria()
+calcularTotalIngresos()
+calcularTotalGastos()
+calcularBalance()
+determinarMayorGasto()
 
 ### Módulo de presentación
+mostrarMovimientosCategoria()
+generarReporte()
+mostrarAdvertencia()
