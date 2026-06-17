@@ -517,7 +517,7 @@ K -->|No| M([Fin])
 
 L --> M
 ```
-## 5. Justificacion.
+### 5. Justificacion.
  
  Para el almacenamiento de la información del sistema se optó por utilizar una lista de movimientos, debido a que todos los registros financieros, tanto ingresos como gastos, comparten la misma estructura de datos: descripción, monto, categoría y tipo. Esta elección permite gestionar los movimientos de manera flexible, ya que facilita la inserción de nuevos elementos y el recorrido completo de la lista cuando es necesario realizar cálculos, generar reportes o ejecutar consultas específicas. Cada movimiento se representa mediante una estructura que agrupa sus cuatro atributos principales. Esta organización centralizada evita la dispersión de información, reduce la duplicación de datos y permite acceder a los valores de forma ordenada y eficiente. Además, contribuye a mantener la coherencia interna del sistema, ya que todos los registros siguen un formato uniforme. En cuanto a las categorías, se definió un conjunto fijo de opciones: Alimentación, Transporte, Entretenimiento, Servicios y Otros. Estas categorías se establecen desde el inicio porque el problema indica que son conocidas previamente y no requieren modificaciones durante la ejecución del programa, lo que simplifica la validación y evita la necesidad de administrar categorías dinámicas.
 
