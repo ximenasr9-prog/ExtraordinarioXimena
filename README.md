@@ -339,3 +339,181 @@ HASTA opcion == 4
 
 FIN
 ```
+## 4. Diagramas de Flujo de Funciones relevantes
+### validarMonto()
+```mermaid
+flowchart TD
+
+A([Inicio]) --> B[/Recibir monto/]
+B --> C{¿Monto > 0?}
+
+C -->|Sí| D[Retornar verdadero]
+C -->|No| E[Retornar falso]
+
+D --> F([Fin])
+E --> F
+```
+### validarCategoria()
+```mermaid
+flowchart TD
+
+A([Inicio]) --> B[/Recibir categoría/]
+
+B --> C{¿Categoría válida?}
+
+C -->|Sí| D[Retornar verdadero]
+C -->|No| E[Retornar falso]
+
+D --> F([Fin])
+E --> F
+```
+### validarTipo()
+```mermaid
+flowchart TD
+
+A([Inicio]) --> B[/Recibir tipo/]
+
+B --> C{¿Es ingreso o gasto?}
+
+C -->|Sí| D[Retornar verdadero]
+C -->|No| E[Retornar falso]
+
+D --> F([Fin])
+E --> F
+```
+### calcularTotalIngresos()
+```mermaid
+flowchart TD
+
+A([Inicio]) --> B[totalIngresos = 0]
+
+B --> C[/Recorrer lista de movimientos/]
+
+C --> D{¿Hay más movimientos?}
+
+D -->|No| E[Retornar totalIngresos]
+
+D -->|Sí| F{¿Movimiento es ingreso?}
+
+F -->|Sí| G[Sumar monto al total]
+
+F -->|No| H[Siguiente movimiento]
+
+G --> H
+
+H --> D
+
+E --> I([Fin])
+```
+### calcularTotalGastos()
+```mermaid
+flowchart TD
+
+A([Inicio]) --> B[totalIngresos = 0]
+
+B --> C[/Recorrer lista de movimientos/]
+
+C --> D{¿Hay más movimientos?}
+
+D -->|No| E[Retornar totalIngresos]
+
+D -->|Sí| F{¿Movimiento es ingreso?}
+
+F -->|Sí| G[Sumar monto al total]
+
+F -->|No| H[Siguiente movimiento]
+
+G --> H
+
+H --> D
+
+E --> I([Fin])
+```
+### determinarMayorGasto()
+```mermaid
+flowchart TD
+
+A([Inicio]) --> B[Obtener gastos por categoría]
+
+B --> C[categoriaMayor = Sin datos]
+
+C --> D[gastoMayor = 0]
+
+D --> E[/Recorrer categorías/]
+
+E --> F{¿Hay más categorías?}
+
+F -->|No| G[Retornar categoriaMayor]
+
+F -->|Sí| H{¿Gasto actual > gastoMayor?}
+
+H -->|Sí| I[Actualizar gastoMayor y categoriaMayor]
+
+H -->|No| J[Siguiente categoría]
+
+I --> J
+
+J --> F
+
+G --> K([Fin])
+```
+### mostrarMovimientosCategoria()
+```mermaid
+flowchart TD
+
+A([Inicio]) --> B[/Recibir categoría buscada/]
+
+B --> C[encontrado = falso]
+
+C --> D[/Recorrer movimientos/]
+
+D --> E{¿Hay más movimientos?}
+
+E -->|No| F{¿Se encontró alguno?}
+
+E -->|Sí| G{¿Pertenece a la categoría?}
+
+G -->|Sí| H[Mostrar movimiento]
+
+H --> I[encontrado = verdadero]
+
+I --> D
+
+G -->|No| D
+
+F -->|Sí| J([Fin])
+
+F -->|No| K[Mostrar No existen movimientos]
+
+K --> J
+```
+### generarReporte
+```mermaid
+flowchart TD
+
+A([Inicio]) --> B{¿Existen movimientos?}
+
+B -->|No| C[Mostrar reporte vacío]
+
+C --> D([Fin])
+
+B -->|Sí| E[Calcular ingresos]
+
+E --> F[Calcular gastos]
+
+F --> G[Calcular balance]
+
+G --> H[Calcular gasto por categoría]
+
+H --> I[Obtener categoría con mayor gasto]
+
+I --> J[Mostrar reporte]
+
+J --> K{¿Balance < 0?}
+
+K -->|Sí| L[Mostrar advertencia]
+
+K -->|No| M([Fin])
+
+L --> M
+```
