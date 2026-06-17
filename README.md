@@ -198,20 +198,144 @@ FIN FUNCION
 #### mostrarMovimientosCategoria()
 ```text
 
-FUNCION mostrarMovimientosCategoria()
-    gastoCategoria = calcularGastoPorCategoria(listaMovimientos)
-    mayorGasto = 0
-    categoriaMayorGasto = ""
-    PARA CADA categoria EN gastoCategoria HACER 
-        SI gastoCategoria[categoria] > mayorGasto ENTONCES 
-            mayorGasto = gastoCategoria[categoria]
-            categoriaMayorGasto = categoria
+FUNCION mostrarMovimientosCategoria(listaMovimientos,categoriaBuscada)
+    encontrado = falso
+    PARA CADA movimiento EN listaMovimiento HACER 
+        SI movimiento.categoria == categoriaBuscada ENTONCES 
+            MOSTRAR movimiento.descripcion
+            MOSTRAR movimiento.monto
+            MOSTRAR movimiento.tipo
+        encontrado = verdadero
         FIN SI
-    FIN PARA
-    RETONAR categoriaMayorGasto
+    FIN PARA 
+
+        SI encontrado == falso ENTONCES 
+            MOSTRAR "Error Categoria no encontrada"
+        FIN SI
 
 FIN FUNCION
 ```
 
-generarReporte()
-mostrarAdvertencia()
+#### generarReporte()
+```text
+
+FUNCION generarReporte(listaMovimientos)
+   SI SIZE(listaMovimientos) == 0 ENTONCES
+    MOSTRAR "No se encontraron movimientos en esta categoria"
+    FIN SI
+
+  totalIngresos = calcularTotalIngresos(listaMovimientos)
+  totalGastos = calcularTotalGastos(listaMovimientos)
+  totalBalance = calcularBalance(ingresosTotales,gastosTotales)
+  gastosCategoria = calcularGastoPorCategoria(listaMovimientos)
+
+  MOSTRAR "===== REPORTE FINANCIERO ====="
+
+    MOSTRAR "Total ingresos: ", totalIngresos
+
+    MOSTRAR "Total gastos: ", totalGastos
+
+    MOSTRAR "Balance actual: ", totalBalance
+
+    MOSTRAR "Desglose de gastos por categoría:"
+    PARA CADA categoria EN gastosCategoria HACER 
+        MOSTRAR categoria, gastoCategoria[categoria]
+    FIN PARA 
+    SI totalBalance < 0 ENTONCES
+    MOSTRAR "ADVERTENCIA: CUIDA TUS GASTOS "
+
+
+
+FIN FUNCION
+```
+#### programaPrincipal
+```
+INICIO
+
+listaMovimientos = LISTA_VACIA
+
+REPETIR
+
+    MOSTRAR "1. Registrar movimiento"
+    MOSTRAR "2. Consultar movimientos por categoría"
+    MOSTRAR "3. Generar reporte"
+    MOSTRAR "4. Salir"
+
+    LEER opcion
+
+    SEGUN opcion HACER
+
+        CASO 1
+
+            LEER descripcion
+            LEER monto
+            LEER categoria
+            LEER tipo
+
+            SI validarMonto(monto) == falso ENTONCES
+
+                MOSTRAR "Monto inválido."
+
+            SINO SI validarCategoria(categoria) == falso ENTONCES
+
+                MOSTRAR "Categoría inválida."
+
+            SINO SI validarTipo(tipo) == falso ENTONCES
+
+                MOSTRAR "Tipo inválido."
+
+            SINO
+
+                movimiento =
+                    crearMovimiento(
+                        descripcion,
+                        monto,
+                        categoria,
+                        tipo
+                    )
+
+                agregarMovimiento(
+                    listaMovimientos,
+                    movimiento
+                )
+
+                MOSTRAR
+                "Movimiento registrado correctamente."
+
+            FIN SI
+
+        FIN CASO
+
+        CASO 2
+
+            LEER categoriaBuscada
+
+            mostrarMovimientosCategoria(
+                listaMovimientos,
+                categoriaBuscada
+            )
+
+        FIN CASO
+
+        CASO 3
+
+            generarReporte(listaMovimientos)
+
+        FIN CASO
+
+        CASO 4
+
+            MOSTRAR "Fin del sistema."
+
+        FIN CASO
+
+        OTRO CASO
+
+            MOSTRAR "Opción inválida."
+
+    FIN SEGUN
+
+HASTA opcion == 4
+
+FIN
+```
